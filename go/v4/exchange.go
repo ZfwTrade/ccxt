@@ -1137,7 +1137,6 @@ func (this *Exchange) GetMarketsList() []MarketInterface {
 	this.Markets.Range(func(key, value interface{}) bool {
 		markets = append(markets, NewMarketInterface(value))
 		return true
-
 	})
 	return markets
 }
@@ -1370,7 +1369,8 @@ func (this *Exchange) EncodeDydxTxForSimulation(
 	message interface{},
 	memo interface{},
 	sequence interface{},
-	publicKey interface{}) interface{} {
+	publicKey interface{},
+) interface{} {
 	return nil
 }
 
@@ -1380,7 +1380,8 @@ func (this *Exchange) EncodeDydxTxForSigning(
 	chainId interface{},
 	account interface{},
 	authenticators interface{},
-	fee interface{}) interface{} {
+	fee interface{},
+) interface{} {
 	return nil
 }
 
@@ -1431,7 +1432,7 @@ func (this *Exchange) UpdateProxySettings() {
 
 	hasHttProxyDefined := (httProxy != nil) || (httpsProxy != nil) || (socksProxy != nil)
 	this.CheckConflictingProxies(hasHttProxyDefined, proxyUrl)
-
+	fmt.Printf("Proxy settings updated: httProxy=%v, httpsProxy=%v, socksProxy=%v\n", httProxy, httpsProxy, socksProxy)
 	if hasHttProxyDefined {
 		proxyTransport := &http.Transport{
 			// MaxIdleConns:       100,
@@ -1478,7 +1479,6 @@ func (this *Exchange) callEndpointAsync(endpointName string, args ...interface{}
 //   - [subscribeHash] key for "subscriptions" map (optional)
 //   - [subscription]  arbitrary value stored in subscriptions (optional)
 func (this *Exchange) Watch(args ...interface{}) <-chan interface{} {
-
 	url, _ := args[0].(string)
 	messageHash, _ := args[1].(string)
 	var message interface{}
