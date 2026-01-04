@@ -11,6 +11,7 @@ package ccxt
 // dependency is present in go.mod (go get if needed).
 
 import (
+	"fmt"
 	"net/http"
 	"net/url"
 	"strings"
@@ -41,6 +42,8 @@ type WSClient struct {
 func NewWSClient(url string, onMessageCallback func(client interface{}, err interface{}), onErrorCallback func(client interface{}, err interface{}), onCloseCallback func(client interface{}, err interface{}), onConnectedCallback func(client interface{}, err interface{}), proxyUrl string, config ...map[string]interface{}) *WSClient {
 	// Call NewClient to do exactly the same initialization
 	client := NewClient(url, onMessageCallback, onErrorCallback, onCloseCallback, onConnectedCallback, config...)
+
+	fmt.Printf("Creating WSClient for URL: %s with proxy: %s\n", url, proxyUrl)
 
 	// Wrap the Client in a WSClient
 	wsClient := &WSClient{
@@ -330,18 +333,23 @@ func (this *WSClient) GetUrl() string {
 func (this *WSClient) GetSubscriptions() map[string]interface{} {
 	return this.Client.GetSubscriptions()
 }
+
 func (this *WSClient) GetLastPong() interface{} {
 	return this.Client.GetLastPong()
 }
+
 func (this *WSClient) SetLastPong(lastPong interface{}) {
 	this.Client.SetLastPong(lastPong)
 }
+
 func (this *WSClient) GetKeepAlive() interface{} {
 	return this.Client.GetKeepAlive()
 }
+
 func (this *WSClient) SetKeepAlive(keepAlive interface{}) {
 	this.Client.SetKeepAlive(keepAlive)
 }
+
 func (this *WSClient) GetFutures() map[string]interface{} {
 	return this.Client.GetFutures()
 }
