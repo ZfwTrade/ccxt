@@ -735,10 +735,16 @@ func (this *Exchange) ArraySlice(array interface{}, first interface{}, second ..
 			if index < 0 {
 				index = 0
 			}
+			if index > length {
+				index = length
+			}
 			if isArrayCache {
 				return reflect.ValueOf(array).Interface().(IArrayCache).ToArray()[index:]
 			}
 			return this.sliceToInterface(parsedArray.Slice(index, length))
+		}
+		if firstInt > length {
+			firstInt = length
 		}
 		if isArrayCache {
 			return reflect.ValueOf(array).Interface().(IArrayCache).ToArray()[firstInt:]
@@ -747,6 +753,34 @@ func (this *Exchange) ArraySlice(array interface{}, first interface{}, second ..
 	}
 
 	secondInt := reflect.ValueOf(second[0]).Convert(reflect.TypeOf(0)).Interface().(int)
+
+	// Normalize firstInt to be within bounds
+	if firstInt < 0 {
+		firstInt = length + firstInt
+		if firstInt < 0 {
+			firstInt = 0
+		}
+	}
+	if firstInt > length {
+		firstInt = length
+	}
+
+	// Normalize secondInt to be within bounds
+	if secondInt < 0 {
+		secondInt = length + secondInt
+		if secondInt < 0 {
+			secondInt = 0
+		}
+	}
+	if secondInt > length {
+		secondInt = length
+	}
+
+	// Ensure firstInt <= secondInt
+	if firstInt > secondInt {
+		firstInt = secondInt
+	}
+
 	if isArrayCache {
 		return reflect.ValueOf(array).Interface().(IArrayCache).ToArray()[firstInt:secondInt]
 	}
@@ -1432,7 +1466,7 @@ func (this *Exchange) UpdateProxySettings() {
 
 	hasHttProxyDefined := (httProxy != nil) || (httpsProxy != nil) || (socksProxy != nil)
 	this.CheckConflictingProxies(hasHttProxyDefined, proxyUrl)
-	fmt.Printf("Proxy settings updated: httProxy=%v, httpsProxy=%v, socksProxy=%v\n", httProxy, httpsProxy, socksProxy)
+	// fmt.Printf("Proxy settings updated: httProxy=%v, httpsProxy=%v, socksProxy=%v\n", httProxy, httpsProxy, socksProxy)
 	if hasHttProxyDefined {
 		proxyTransport := &http.Transport{
 			// MaxIdleConns:       100,
