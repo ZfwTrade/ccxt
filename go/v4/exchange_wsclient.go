@@ -11,7 +11,6 @@ package ccxt
 // dependency is present in go.mod (go get if needed).
 
 import (
-	"fmt"
 	"net/http"
 	"net/url"
 	"strings"
@@ -43,7 +42,7 @@ func NewWSClient(url string, onMessageCallback func(client interface{}, err inte
 	// Call NewClient to do exactly the same initialization
 	client := NewClient(url, onMessageCallback, onErrorCallback, onCloseCallback, onConnectedCallback, config...)
 
-	fmt.Printf("Creating WSClient for URL: %s with proxy: %s\n", url, proxyUrl)
+	// fmt.Printf("Creating WSClient for URL: %s with proxy: %s\n", url, proxyUrl)
 
 	// Wrap the Client in a WSClient
 	wsClient := &WSClient{
