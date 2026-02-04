@@ -40,16 +40,18 @@ import {BaseError, ExchangeError, AuthenticationError, PermissionDenied, Account
 //-----------------------------------------------------------------------------
 // this is updated by vss.js when building
 
-const version = '4.5.30';
+const version = '4.5.36';
 
 (Exchange as any).ccxtVersion = version
 
 //-----------------------------------------------------------------------------
 
+import alp from  './src/alp.js'
 import alpaca from  './src/alpaca.js'
 import apex from  './src/apex.js'
 import arkham from  './src/arkham.js'
 import ascendex from  './src/ascendex.js'
+import aster from  './src/aster.js'
 import backpack from  './src/backpack.js'
 import bequant from  './src/bequant.js'
 import bigone from  './src/bigone.js'
@@ -76,7 +78,6 @@ import bittrade from  './src/bittrade.js'
 import bitvavo from  './src/bitvavo.js'
 import blockchaincom from  './src/blockchaincom.js'
 import blofin from  './src/blofin.js'
-import btcalpha from  './src/btcalpha.js'
 import btcbox from  './src/btcbox.js'
 import btcmarkets from  './src/btcmarkets.js'
 import btcturk from  './src/btcturk.js'
@@ -133,7 +134,6 @@ import modetrade from  './src/modetrade.js'
 import myokx from  './src/myokx.js'
 import ndax from  './src/ndax.js'
 import novadax from  './src/novadax.js'
-import oceanex from  './src/oceanex.js'
 import okx from  './src/okx.js'
 import okxus from  './src/okxus.js'
 import onetrading from  './src/onetrading.js'
@@ -164,6 +164,7 @@ import alpacaPro from  './src/pro/alpaca.js'
 import apexPro from  './src/pro/apex.js'
 import arkhamPro from  './src/pro/arkham.js'
 import ascendexPro from  './src/pro/ascendex.js'
+import asterPro from  './src/pro/aster.js'
 import backpackPro from  './src/pro/backpack.js'
 import bequantPro from  './src/pro/bequant.js'
 import binancePro from  './src/pro/binance.js'
@@ -239,10 +240,12 @@ import woofiproPro from  './src/pro/woofipro.js'
 import xtPro from  './src/pro/xt.js'
 
 const exchanges = {
+    'alp':                    alp,
     'alpaca':                 alpaca,
     'apex':                   apex,
     'arkham':                 arkham,
     'ascendex':               ascendex,
+    'aster':                  aster,
     'backpack':               backpack,
     'bequant':                bequant,
     'bigone':                 bigone,
@@ -269,7 +272,6 @@ const exchanges = {
     'bitvavo':                bitvavo,
     'blockchaincom':          blockchaincom,
     'blofin':                 blofin,
-    'btcalpha':               btcalpha,
     'btcbox':                 btcbox,
     'btcmarkets':             btcmarkets,
     'btcturk':                btcturk,
@@ -326,7 +328,6 @@ const exchanges = {
     'myokx':                  myokx,
     'ndax':                   ndax,
     'novadax':                novadax,
-    'oceanex':                oceanex,
     'okx':                    okx,
     'okxus':                  okxus,
     'onetrading':             onetrading,
@@ -357,6 +358,7 @@ const pro = {
     'apex':                   apexPro,
     'arkham':                 arkhamPro,
     'ascendex':               ascendexPro,
+    'aster':                  asterPro,
     'backpack':               backpackPro,
     'bequant':                bequantPro,
     'binance':                binancePro,
@@ -574,10 +576,12 @@ export {
     IsolatedBorrowRates,
     CrossBorrowRates,
     LeverageTiers,
+    alp,
     alpaca,
     apex,
     arkham,
     ascendex,
+    aster,
     backpack,
     bequant,
     bigone,
@@ -604,7 +608,6 @@ export {
     bitvavo,
     blockchaincom,
     blofin,
-    btcalpha,
     btcbox,
     btcmarkets,
     btcturk,
@@ -661,7 +664,6 @@ export {
     myokx,
     ndax,
     novadax,
-    oceanex,
     okx,
     okxus,
     onetrading,
